@@ -149,23 +149,6 @@ button {
     min-width: 0;
 }
 
-.brand-mark {
-    display: grid;
-    place-items: center;
-    flex: 0 0 auto;
-    width: 36px;
-    height: 36px;
-    border: 1px solid var(--border);
-    border-radius: var(--radius-full);
-    background: var(--accent-soft);
-    color: var(--accent);
-}
-
-.brand-mark svg {
-    width: 19px;
-    height: 19px;
-}
-
 .brand-text {
     min-width: 0;
 }
@@ -517,7 +500,11 @@ button {
     resize: none;
     outline: none;
     overflow-y: auto;
-    scrollbar-width: thin;
+    scrollbar-width: none;
+}
+
+#message-input::-webkit-scrollbar {
+    display: none;
 }
 
 #message-input::placeholder {
