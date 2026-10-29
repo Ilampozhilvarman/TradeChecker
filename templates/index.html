@@ -1,17 +1,90 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<meta charset="UTF-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Finance Questions</title>
-	<link rel="stylesheet" href="../static/style.css">
-	<link rel="preconnect" href="https://googleapis.com">
-	<link rel="preconnect" href="https://gstatic.com" crossorigin>
-	<link href="https://googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..144,400;8..144,600&display=swap" rel="stylesheet">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <meta name="theme-color" content="#f7f3ec" media="(prefers-color-scheme: light)">
+    <meta name="theme-color" content="#1b1916" media="(prefers-color-scheme: dark)">
+    <title>TradeChecker — Finance Q&amp;A</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:opsz,wght@8..144,400;8..144,600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
 <body>
-    <div id="TextBox"></div>
-    <form id="FormElem"><input type="text" id="TextInput"></form>
-    <script src="../static/script.js"></script>
+    <div class="app">
+        <header class="app-header">
+            <div class="brand">
+                <div class="brand-mark" aria-hidden="true">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M4 17l5-5 3 3 7-8"></path>
+                        <path d="M15 7h4v4"></path>
+                    </svg>
+                </div>
+                <div class="brand-text">
+                    <h1>TradeChecker</h1>
+                    <p>Finance questions, answered</p>
+                </div>
+            </div>
+            <button id="new-chat" class="ghost-button" type="button">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                    <path d="M12 5v14M5 12h14"></path>
+                </svg>
+                New chat
+            </button>
+        </header>
+
+        <div class="chat-scroll" id="chat-scroll">
+            <main class="chat-column">
+                <section id="empty-state" class="empty-state">
+                    <h2>What are you curious about?</h2>
+                    <p>Ask about a ticker, a term, or how something works. No rush.</p>
+                </section>
+
+                <ol id="messages" class="messages" aria-live="polite" aria-relevant="additions text"></ol>
+            </main>
+        </div>
+
+        <footer class="composer-wrap">
+            <form id="composer" class="composer" autocomplete="off">
+                <label class="sr-only" for="message-input">Message</label>
+                <textarea id="message-input" rows="1" maxlength="2000" placeholder="Ask a finance question…"></textarea>
+                <button id="send-button" class="send-button" type="submit" aria-label="Send message">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                        <path d="M12 19V5"></path>
+                        <path d="M6 11l6-6 6 6"></path>
+                    </svg>
+                </button>
+            </form>
+            <p class="composer-hint"><kbd>Enter</kbd> to send <span aria-hidden="true">·</span> <kbd>Shift</kbd> + <kbd>Enter</kbd> for a new line</p>
+        </footer>
+    </div>
+
+    <template id="message-template">
+        <li class="message">
+            <div class="avatar" aria-hidden="true">
+                <svg class="avatar-bot" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <rect x="4" y="7" width="16" height="12" rx="3"></rect>
+                    <path d="M12 3v4M9 13h.01M15 13h.01"></path>
+                </svg>
+                <svg class="avatar-user" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="12" cy="8" r="3.5"></circle>
+                    <path d="M5 20a7 7 0 0 1 14 0"></path>
+                </svg>
+            </div>
+            <div class="message-body">
+                <div class="message-meta">
+                    <span class="message-author"></span>
+                    <time class="message-time"></time>
+                </div>
+                <div class="bubble">
+                    <p class="bubble-text"></p>
+                </div>
+            </div>
+        </li>
+    </template>
+
+    <script src="{{ url_for('static', filename='script.js') }}" defer></script>
 </body>
 </html>
